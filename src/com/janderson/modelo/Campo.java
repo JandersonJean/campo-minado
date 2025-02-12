@@ -3,16 +3,16 @@ package com.janderson.modelo;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.janderson.excecao.ExplosaoException;
+
+
 public class Campo {
 	
 	private final int linha;
 	private final int coluna;
 		
-	@SuppressWarnings("unused")
 	private boolean aberto;
-	@SuppressWarnings("unused")
 	private boolean minado;
-	@SuppressWarnings("unused")
 	private boolean marcado;
 	
 	private List<Campo> vizinhos = new ArrayList<>();
@@ -40,5 +40,32 @@ public class Campo {
 		} else {
 			return false;
 		}
+	}
+	
+	void alterarMarcado() {
+		if(!aberto) {
+			marcado = !marcado;
+		}
+	}
+	
+	boolean abrir() {
+		if(!aberto && !marcado) {
+			aberto = true;
+			
+			if(minado) {
+				throw new ExplosaoException();
+			}
+			
+			if(vizinhancaSegura()) {
+				vizinhos.forEach(v -> v.abrir());
+			}
+			return true;
+		} else {
+			return false;			
+		}
+	}
+	
+	boolean vizinhancaSegura() {
+		return vizinhos.stream().noneMatch(v -> v.minado);
 	}
 }
