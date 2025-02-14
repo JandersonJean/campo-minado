@@ -1,11 +1,7 @@
 package com.janderson.modelo;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import org.junit.jupiter.api.Test;
 
 import com.janderson.excecao.ExplosaoException;
 
@@ -85,6 +81,10 @@ public class Campo {
 		return minado;
 	}
 	
+	void setAberto(boolean aberto) {
+		this.aberto = aberto;
+	}
+
 	public boolean isAberto() {
 		return aberto;
 	}
