@@ -1,7 +1,11 @@
 package com.janderson.modelo;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.ArrayList;
 import java.util.List;
+
+import org.junit.jupiter.api.Test;
 
 import com.janderson.excecao.ExplosaoException;
 
@@ -42,7 +46,7 @@ public class Campo {
 		}
 	}
 	
-	void alterarMarcado() {
+	void alterarMarcacao() {
 		if(!aberto) {
 			marcado = !marcado;
 		}
@@ -67,5 +71,17 @@ public class Campo {
 	
 	boolean vizinhancaSegura() {
 		return vizinhos.stream().noneMatch(v -> v.minado);
+	}
+	
+	void minar() {
+		minado = true;
+	}
+	
+	public boolean isMarcado() {
+		return marcado;
+	}
+	
+	public boolean isAberto() {
+		return aberto;
 	}
 }
